@@ -4,9 +4,14 @@ public class FireStation {
 
     public void fireStationStatus() {
         Thread administrator = new Thread(new Administrator());
-        Thread officer = new Thread(new Officer(isAlarm,new FireStation()));
-        Thread fireman = new Thread(new Fireman(isAlarm,new FireStation()));
+        Thread officer = new Thread(new Officer(isAlarm));
+        Thread fireman = new Thread(new Fireman(isAlarm));
         administrator.start();
+        try {
+            administrator.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         officer.start();
         fireman.start();
         synchronized (this){

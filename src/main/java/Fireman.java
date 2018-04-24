@@ -1,10 +1,9 @@
 public class Fireman implements Runnable {
     private boolean isAlarm;
-    private final FireStation fireStation;
 
-    Fireman(boolean isAlarm, FireStation fireStation) {
+    Fireman(boolean isAlarm) {
         this.isAlarm = isAlarm;
-        this.fireStation=fireStation;
+
     }
 
     @Override
@@ -12,9 +11,8 @@ public class Fireman implements Runnable {
         String name = Thread.currentThread().getName();
         try {
             if (isAlarm) {
-                 synchronized (fireStation) {
-                     fireStation.notify();
-                     fireStation.wait();
+                synchronized (this) {
+                    this.wait();
                  }
             } else {
                 Thread.sleep(1000);
