@@ -14,7 +14,7 @@ public class FireStation {
         }
         officer.start();
         fireman.start();
-        synchronized (this){
+        synchronized (this) {
             if (!isAlarm) {
                 notifyAll();
             }

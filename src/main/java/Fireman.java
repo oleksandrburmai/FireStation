@@ -13,7 +13,7 @@ public class Fireman implements Runnable {
             if (isAlarm) {
                 synchronized (this) {
                     this.wait();
-                 }
+                }
             } else {
                 Thread.sleep(1000);
                 System.out.println(name + " Fireman alarm");
