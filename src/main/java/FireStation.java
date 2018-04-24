@@ -1,17 +1,12 @@
 public class FireStation {
 
-    private boolean isAlarm;
+    public static boolean isAlarm = true;
 
     public void fireStationStatus() {
         Thread administrator = new Thread(new Administrator());
-        Thread officer = new Thread(new Officer(isAlarm));
-        Thread fireman = new Thread(new Fireman(isAlarm));
+        Thread officer = new Thread(new Officer());
+        Thread fireman = new Thread(new Fireman());
         administrator.start();
-        try {
-            administrator.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         officer.start();
         fireman.start();
         synchronized (this) {
@@ -19,11 +14,5 @@ public class FireStation {
                 notifyAll();
             }
         }
-
-    }
-
-
-    public void setStatus(boolean isAlarm) {
-        this.isAlarm = isAlarm;
     }
 }

@@ -1,16 +1,10 @@
 public class Officer implements Runnable {
 
-    private boolean isAlarm;
-
-    Officer(boolean isAlarm) {
-        this.isAlarm = isAlarm;
-    }
-
     @Override
     public void run() {
         String name = Thread.currentThread().getName();
         try {
-            if (isAlarm) {
+            if (FireStation.isAlarm) {
                 synchronized (this) {
                     this.wait();
                 }
