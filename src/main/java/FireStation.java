@@ -1,21 +1,24 @@
 public class FireStation {
 
-    private boolean isOk;
+    private boolean isAlarm=true;
 
-    public synchronized void fireStationStatus() {
+    public void fireStationStatus() {
         Thread administrator = new Thread(new Administrator());
-        Thread officer = new Thread(new Officer(isOk));
-        Thread fireman = new Thread(new Fireman(isOk));
+        Thread officer = new Thread(new Officer(isAlarm,new FireStation()));
+        Thread fireman = new Thread(new Fireman(isAlarm,new FireStation()));
         administrator.start();
         officer.start();
         fireman.start();
-        if (!isOk) {
+        synchronized (this){
+            if (!isAlarm) {
                 notifyAll();
+            }
         }
+
     }
 
 
-    public synchronized void setStatus(boolean isOk) {
-        this.isOk = isOk;
+    public void setStatus(boolean isAlarm) {
+        this.isAlarm = isAlarm;
     }
 }
