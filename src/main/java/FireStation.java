@@ -1,6 +1,6 @@
 public class FireStation {
 
-    private boolean isAlarm=true;
+    private boolean isAlarm;
 
     public void fireStationStatus() {
         Thread administrator = new Thread(new Administrator());
