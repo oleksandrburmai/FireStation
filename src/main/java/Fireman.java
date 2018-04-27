@@ -4,7 +4,7 @@ public class Fireman implements Runnable {
     public void run() {
         String name = Thread.currentThread().getName();
         try {
-            if (FireStation.isAlarm) {
+            if (FireStation.getIsAlarm()) {
                 synchronized (this) {
                     this.wait();
                 }

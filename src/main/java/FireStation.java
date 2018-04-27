@@ -1,6 +1,8 @@
-public class FireStation {
+import lombok.Setter;
 
-    public static boolean isAlarm = true;
+public class FireStation {
+    @Setter
+    private static boolean isAlarm = true;
 
     public void fireStationStatus() {
         Thread administrator = new Thread(new Administrator());
@@ -14,5 +16,9 @@ public class FireStation {
                 notifyAll();
             }
         }
+    }
+
+    public static boolean getIsAlarm() {
+        return isAlarm;
     }
 }
